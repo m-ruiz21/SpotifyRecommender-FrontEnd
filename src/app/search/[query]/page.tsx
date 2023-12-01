@@ -6,12 +6,13 @@ import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Navbar from '../../../components/navbar';
+import { Navbar } from '../../../components/results-navbar';
 import LoadingScreen from '../../../components/loading';
 import { Song } from '../../../models/song';
 import { extractBackgroundColor } from './utils';
 import { Playlist } from '@/models/playlist';
 import { useSession } from 'next-auth/react';
+import { redirect } from 'next/navigation';
 
 export default function SearchResults({ params }: { params: { query: string } }) {
   
@@ -69,25 +70,33 @@ export default function SearchResults({ params }: { params: { query: string } })
   };
 
   const addSongs = async (songs: Song[]) => {
-    // create object of type interface
     const playlist: Playlist = {
       name: query as string, 
       songs: songs,
     };    
 
     try {
-      await axios.put<Playlist>('/api/playlists', playlist);
+      const response = await axios.put<Playlist>('/api/playlists', playlist, {
+        headers: {
+          'Authorization': `Bearer ${session?.accessToken}`
+        } 
+      });
 
-        toast.success("Successfully added playlist!", {
-          position: 'top-center',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: 'dark',
-        });
+      const id = response.data
+      const url = `https://open.spotify.com/playlist/${id}`
+      toast.success(`Successfully added playlist!`, {
+        position: 'top-center',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'dark',
+      });
+
+      window.open(url, '_blank');
+      
     } catch (error) {
       toast.error('Error 500: Internal Server Failure', {
         position: 'top-center',

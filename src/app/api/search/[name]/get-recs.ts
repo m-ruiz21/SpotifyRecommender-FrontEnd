@@ -14,13 +14,13 @@ const searchPlaylists = async (query: string, client: SpotifyWebApi): Promise<Se
     const playlist = response.body?.playlists?.items?.[0];
 
     const tracks = await client.getPlaylistTracks(playlist?.id as string, {limit: 5});
-    const track_ids = tracks.body.items.map((item) => item?.track?.id as string).join(",");
-    const track_artists = tracks.body.items.slice(0,1).map((item) => item?.track?.artists?.[0]?.id as string).join(",");
+    const track_ids = tracks.body.items.slice(0,3).map((item) => item?.track?.id as string).join(",");
+    const track_artists = tracks.body.items.slice(3,5).map((item) => item?.track?.artists?.[0]?.id as string).join(",");
 
     console.log(`finished searching for query: ${query}`)
     console.log({
-        seed_artists: track_artists,
-        seed_tracks: track_ids
+        seed_artists: tracks.body.items.slice(0,3).map((item) => item?.track?.name as string).join(","),
+        seed_tracks: tracks.body.items.slice(3,5).map((item) => item?.track?.artists?.[0]?.name as string).join(",")
     })
     
     return {
