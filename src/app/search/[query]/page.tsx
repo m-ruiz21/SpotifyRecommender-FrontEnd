@@ -122,16 +122,16 @@ export default function SearchResults({ params }: { params: { query: string } })
           <Navbar />
 
         {/* Responsive Arrow Buttons for Larger Devices */}
-        <div className="hidden md:flex mt-4 justify-between px-10 py-5">
+        {/* <div className="hidden md:flex mt-4 justify-between px-10 py-5">
           <button
             onClick={() => {
               const newSelectedIndex = selectedIndex > 0 ? selectedIndex - 1 : songs.length - 1;
               setSelectedIndex(newSelectedIndex);
             }}
             className="p-5 rounded-full bg-white bg-opacity-10"
-          >
+          > */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/left-arrow.png" alt="previous" className="w-4 h-4" />
+            {/* <img src="/left-arrow.png" alt="previous" className="w-4 h-4" />
           </button>
           <button
             onClick={() => {
@@ -139,11 +139,11 @@ export default function SearchResults({ params }: { params: { query: string } })
               setSelectedIndex(newSelectedIndex);
             }}
             className="p-5 rounded-full bg-white bg-opacity-10"
-          >
+          > */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/right-arrow.png" alt="next" className="w-4 h-4" />
+            {/* <img src="/right-arrow.png" alt="next" className="w-4 h-4" />
           </button>
-        </div>
+        </div> */}
 
           <div className="md:hidden">
             <Carousel
@@ -190,12 +190,24 @@ export default function SearchResults({ params }: { params: { query: string } })
               showArrows={false}
             >
               {songs.map((song: Song) => (
-                <div key={song.id} className="grid grid-cols-2 mt-8 pb-10">
-                  <div className="col-span-1">
+                <div key={song.id} className="grid grid-cols-12 mt-8 pb-10">
+                  <div className="col-span-1 self-center">
+                    <button
+                      onClick={() => {
+                        const newSelectedIndex = selectedIndex > 0 ? selectedIndex - 1 : songs.length - 1;
+                        setSelectedIndex(newSelectedIndex);
+                      }}
+                      className="p-5 rounded-full bg-white bg-opacity-10"
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src="/left-arrow.png" alt="previous" className="w-8 h-8" />
+                    </button>
+                  </div>
+                  <div className="col-span-5">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={song.images[0].url} alt={song.name} className="w-full max-w-[75%]" />
                   </div>
-                  <div className="col-span-1 text-left text-white flex flex-col justify-between md:h-full md:ml-0 mx-[12.5%]">
+                  <div className="col-span-5 text-left text-white flex flex-col justify-between md:h-full md:ml-0 mx-[12.5%]">
                     <p className="xl:text-4xl md:text-3xl sm:mt-0 sm:text-2xl mt-2 text-xl opacity-80">{song.album}</p>
                     <h1 className="xl:mt-8 xl:text-8xl md:mt-6 md:text-6xl sm:text-5xl sm:mt-4 mt-2 text-4xl font-bold">
                       {song.name}
@@ -211,6 +223,18 @@ export default function SearchResults({ params }: { params: { query: string } })
                         Add Playlist To Library
                       </button>
                     </div>
+                  </div>
+                  <div className="col-span-1 self-center">
+                    <button
+                      onClick={() => {
+                        const newSelectedIndex = selectedIndex < songs.length - 1 ? selectedIndex + 1 : 0;
+                        setSelectedIndex(newSelectedIndex);
+                      }}
+                      className="p-5 rounded-full bg-white bg-opacity-10"
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src="/right-arrow.png" alt="next" className="w-8 h-8" />
+                    </button>
                   </div>
                 </div>
               ))}
