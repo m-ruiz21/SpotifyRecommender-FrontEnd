@@ -1,6 +1,6 @@
 import { Dispatch } from "react";
 import { SetStateAction } from "react";
-const ColorThief = require('colorthief');
+import ColorThief from "colorthief";
 
 export const extractBackgroundColor = (url: string, setBackgroundColor: Dispatch<SetStateAction<string>>) => {
     const img: HTMLImageElement = document.createElement('img');

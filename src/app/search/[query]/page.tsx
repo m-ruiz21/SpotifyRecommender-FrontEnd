@@ -23,8 +23,6 @@ export default function SearchResults({ params }: { params: { query: string } })
 
   const { data: session } = useSession();
 
-  console.log(`token: ${session?.accessToken}`)
-  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -53,7 +51,7 @@ export default function SearchResults({ params }: { params: { query: string } })
       }
     };
 
-    if (query) {
+    if (query && session?.accessToken) {
       fetchData();
     }
   }, [query, session?.accessToken]);

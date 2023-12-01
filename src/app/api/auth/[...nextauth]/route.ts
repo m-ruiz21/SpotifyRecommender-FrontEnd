@@ -20,7 +20,6 @@ const handler = NextAuth({
         async jwt({token, user, account, profile }) { 
             if (account && user){
                 token.accessToken = account?.access_token as string
-                console.log(`GAVE ACCESS TOKEN ${token.accessToken}`)
             }
 
             return token;

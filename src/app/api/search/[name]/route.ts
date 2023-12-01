@@ -27,7 +27,6 @@ export const GET = async (
         res = new Response(res_body, {status: 500})      
     }
 
-    console.log(res)
     console.log(`[Song Search]: Completed Search Song Request for ${name}`);
     return res;
 };
