@@ -17,7 +17,7 @@
   height: 60px;
   margin: 10px;
   border-radius: 50%;
-  background-color: #00B1E1; /* Initial color */
+  background-color: #FFFFFF; /* Initial color */
   animation-duration: 4s; /* Increased duration to accommodate both growing and shrinking */
   animation-iteration-count: infinite;
   animation-timing-function: ease-in-out;
@@ -45,7 +45,7 @@
 
 @keyframes wave-animation {
   0% {
-    background-color: #00B1E1; /* Initial color - blue */
+    background-color: #FFFFFF; /* Initial color - blue */
     transform: scale(1);
   }
   25% {
@@ -55,7 +55,7 @@
     transform: scale(1);
   }
   51% {
-    background-color: #FF4081;
+    background-color: #1DB954;
   }
   75% {
     transform: scale(.2);
