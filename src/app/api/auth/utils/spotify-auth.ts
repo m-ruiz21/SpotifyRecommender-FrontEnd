@@ -1,3 +1,5 @@
+import SpotifyWebApi from "spotify-web-api-node";
+
 const scopes = [
     "user-read-email",
     "user-top-read",
@@ -15,4 +17,10 @@ const queryParamString = new URLSearchParams(params).toString();
 
 const AUTH_URL = `https://accounts.spotify.com/authorize?` + queryParamString.toString();
 
-export { AUTH_URL };
+const spotifyApi = new SpotifyWebApi({
+    clientId: process.env.SPOTIFY_CLIENT_ID,
+    clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
+    redirectUri: process.env.SPOTIFY_REDIRECT_URI,
+});
+
+export { AUTH_URL , spotifyApi};

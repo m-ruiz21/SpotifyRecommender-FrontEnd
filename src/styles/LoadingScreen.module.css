@@ -1,0 +1,80 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #121212;
+}
+
+.waveContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wave {
+  width: 60px;
+  height: 60px;
+  margin: 10px;
+  border-radius: 50%;
+  background-color: #00B1E1; /* Initial color */
+  animation-duration: 4s; /* Increased duration to accommodate both growing and shrinking */
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+.wave1 {
+  animation-name: wave-animation;
+  animation-delay: 0s;
+}
+
+.wave2 {
+  animation-name: wave-animation;
+  animation-delay: .5s;
+}
+
+.wave3 {
+  animation-name: wave-animation;
+  animation-delay: 1s;
+}
+
+.wave4 {
+  animation-name: wave-animation;
+  animation-delay: 1.5s;
+}
+
+@keyframes wave-animation {
+  0% {
+    background-color: #00B1E1; /* Initial color - blue */
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(.2);
+  }
+  50% {
+    transform: scale(1);
+  }
+  51% {
+    background-color: #FF4081;
+  }
+  75% {
+    transform: scale(.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 768px) { /* Tailwind MD screens */
+  .wave {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@media (max-width: 640px) { /* Tailwind SM screens */
+  .wave {
+    width: 15px;
+    height: 15px;
+  }
+}
