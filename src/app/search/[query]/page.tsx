@@ -1,6 +1,7 @@
+'use client'
+
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useRouter } from 'next/router';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { ToastContainer, toast } from 'react-toastify';
@@ -10,23 +11,35 @@ import LoadingScreen from '../../../components/loading';
 import { Song } from '../../../models/song';
 import { extractBackgroundColor } from './utils';
 import { Playlist } from '@/models/playlist';
+import { useSession } from 'next-auth/react';
 
-export default function SearchResults() {
-  const router = useRouter();
-  const { query } = router.query;
+export default function SearchResults({ params }: { params: { query: string } }) {
+  
+  const query = params.query; 
   const [songs, setSongs] = useState<Song[]>([]);
   const [backgroundColor, setBackgroundColor] = useState<string>(''); 
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [loadingSongs, setLoadingSongs] = useState(true);
 
+  const { data: session } = useSession();
+
+  console.log(`token: ${session?.accessToken}`)
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`/api/search/${query as string}`);
+        const response = await axios.get(`/api/search/${query as string}`,
+          { 
+            headers: { 
+              'Authorization': `Bearer ${session?.accessToken}`
+            } 
+          });
+
         const { data } = response;
         setSongs(data);
         setLoadingSongs(false);
       } catch (error: any) { 
+        setLoadingSongs(false);
         toast.error(error, {
           position: 'top-center',
           autoClose: 5000,
@@ -43,7 +56,7 @@ export default function SearchResults() {
     if (query) {
       fetchData();
     }
-  }, [query]);
+  }, [query, session?.accessToken]);
 
   useEffect(() => {
     if (songs.length > 0) {

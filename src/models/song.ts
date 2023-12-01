@@ -6,12 +6,10 @@ export interface Song {
     album: string;
     durationMs: number;
     images: AlbumImage[];
-    explicit: boolean;
-    timeAdded: Date;
 }
 
 export interface AlbumImage {
-    height: number;
-    width: number;
+    height: number | undefined;
+    width: number | undefined;
     url: string;
 }
