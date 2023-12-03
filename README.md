@@ -1,4 +1,6 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Spotify Co-pilot Front-End
+
+This is a [Next.js](https://nextjs.org/) project with Typescript and TailwindCSS. The is the front-end of the project [Spotify Copilot](https://github.com/m-ruiz21/SpotifyRecommender). As such, the documentation can be found in the [wiki](https://github.com/m-ruiz21/SpotifyRecommender/wiki) of the project.
 
 ## Getting Started
 
